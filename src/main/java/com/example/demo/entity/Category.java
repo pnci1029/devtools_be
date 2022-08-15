@@ -1,5 +1,5 @@
 package com.example.demo.entity;
 
 public enum Category {
-    HW, SW
+    하드웨어, 소프트웨어
 }

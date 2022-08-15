@@ -32,9 +32,7 @@ public class CommentService {
         ArticleEntity target = articleRepository.findById(articleId).orElseThrow(
                 () -> new NullPointerException("댓글을 달기 위한 게시물이 존재하지 않습니다.")
         );
-        String username = getLoginUserName();
-
-        CommentEntity result = new CommentEntity(dto, username,target, articleId);
+        CommentEntity result = new CommentEntity(dto, getLoginUserName(),target, articleId);
 
         commentRepository.save(result);
         return result;

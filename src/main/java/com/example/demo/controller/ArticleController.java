@@ -9,6 +9,7 @@ import com.example.demo.service.ArticleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 @CrossOrigin("http://localhost:3000")
 @RestController
 @RequiredArgsConstructor
@@ -58,4 +59,5 @@ public class ArticleController {
     public ArticleDetailResponseDto getDetailArticles(@PathVariable Long id) {
         return articleService.getDetailArticles(id);
     }
+
 }

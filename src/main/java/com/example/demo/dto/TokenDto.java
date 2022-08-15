@@ -10,7 +10,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 @NoArgsConstructor
 public class TokenDto {
 
-    private String token;
+    private String mytoken;
 
 
 

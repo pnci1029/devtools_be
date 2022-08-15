@@ -96,17 +96,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //authenticate는 로그인 , signup은 회원가입임
                 .and()
                 .authorizeRequests()
-                .antMatchers("/api/hello").permitAll()
+//                .antMatchers("/api/hello").permitAll()
                 .antMatchers("/api/login").permitAll()
                 .antMatchers("/api/signup").permitAll()
 
 
 
-                .antMatchers("/test").permitAll()
-                .antMatchers("/login").permitAll()
-                .antMatchers("/signup").permitAll()
-                .antMatchers("/hello").permitAll()
                 .antMatchers("/**").permitAll()
+
                 .anyRequest().authenticated()
 
 

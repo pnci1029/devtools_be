@@ -11,7 +11,9 @@ import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,9 +32,11 @@ public class ArticleEntity  {
     private Long id;
 
     @Column(nullable = false)
+    @Size(max = 30, min = 1)
     private String title;
 
     @Column(nullable = false)
+    @Size(max = 400, min = 1)
     private String content;
 
     @Column(nullable = false)
@@ -54,7 +58,8 @@ public class ArticleEntity  {
 //    private Category category;
 
     @JsonIgnore
-    private LocalDateTime now1 = LocalDateTime.now();
+    @Transient
+    private LocalDateTime now1 = LocalDateTime.now(ZoneId.of("Asia/Seoul"));;
 
     @Column(name = "createAt", nullable = false)
     private String createAt = now1.format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 HH시 mm분 ss초"));

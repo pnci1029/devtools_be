@@ -30,6 +30,8 @@ dependencies {
 	testImplementation 'org.springframework.security:spring-security-test'
 	implementation 'org.springframework.boot:spring-boot-starter-mustache'
 
+//	mysql 의존성 주입 반드시반드시반드시반디스반드시반드시반드시반디스 넣기
+	runtimeOnly 'mysql:mysql-connector-java'
 
 	implementation 'io.jsonwebtoken:jjwt-api:0.11.2'
 	//오류 해결을 위해 추가로 넣은 의존성

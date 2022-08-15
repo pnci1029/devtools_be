@@ -27,10 +27,10 @@ public class ArticleDetailResponseDto {
 
     private String now;
 
-    private List<CommentEntity> commentEntity;
+    private List<CommentEntity> comments;
 
 
-    public ArticleDetailResponseDto(ArticleEntity articleEntity, List<CommentEntity> commentEntity) {
+    public ArticleDetailResponseDto(ArticleEntity articleEntity, List<CommentEntity> comments) {
         this.id = articleEntity.getId();
         this.title = articleEntity.getTitle();
         this.content = articleEntity.getContent();
@@ -38,6 +38,6 @@ public class ArticleDetailResponseDto {
         this.category = articleEntity.getUserName();
         this.isMyArticles = Boolean.TRUE;
         this.now = articleEntity.getCreateAt();
-        this.commentEntity = commentEntity;
+        this.comments = comments;
     }
 }

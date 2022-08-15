@@ -99,6 +99,12 @@ public class ArticleService {
     @Transactional
     public ArticleEntity postArticles(ArticleDto articleDto) {
         ArticleEntity articleEntity = new ArticleEntity(articleDto, bringUserName());
+        if (articleDto.getTitle().length() < 1 || articleDto.getTitle().length() > 30) {
+            throw new IllegalArgumentException("게시글은 1~40글자로 작성해주세요");
+        }
+        if (articleDto.getContent().length() < 1 || articleDto.getContent().length() > 400) {
+            throw new IllegalArgumentException("내용은 1~300글자로 작성해주세요");
+        }
         articleRepository.save(articleEntity);
         return articleEntity;
     }
@@ -149,4 +155,5 @@ public class ArticleService {
         ArticleDetailResponseDto articleDetailResponseDto = new ArticleDetailResponseDto(target, commentEntity);
         return articleDetailResponseDto;
     }
+
 }

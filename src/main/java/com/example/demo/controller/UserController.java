@@ -8,13 +8,12 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 @CrossOrigin("http://localhost:3000")
 @RestController
 @RequestMapping("/api")
 public class UserController {
+
     private final UserService userService;
 
     public UserController(UserService userService) {
@@ -22,11 +21,16 @@ public class UserController {
     }
 
     //가입 SecurrityConfig.java에서 permitAll 설정했기때문에 권한없이 가능함
-    @PostMapping("/signup")
+    @PostMapping("/register")
     public ResponseEntity<User> signup(
             @Valid @RequestBody UserDto userDto
     ) {
         return ResponseEntity.ok(userService.signup(userDto));
+    }
+
+    @PostMapping("/register/username")
+    public Boolean checkUsername(@RequestBody UserDto userDto) {
+        return userService.checkUsername(userDto);
     }
 
     @GetMapping("/user")

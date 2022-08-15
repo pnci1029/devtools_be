@@ -1,23 +1,26 @@
 spring:
-
-  h2:
-    console:
-      enabled: true
-
-
+#  h2:
+#    console:
+#      enabled: true
+#  datasource:
+#    url: jdbc:h2:mem:testdb
+#    driver-class-name: org.h2.Driver
+#    username: sa
+#    password:
   datasource:
-    url: jdbc:h2:mem:testdb
-    driver-class-name: org.h2.Driver
-    username: sa
-    password:
+    url: jdbc:mysql://spartaf12.ckf45r62i7nd.ap-northeast-2.rds.amazonaws.com:3306/spartaf12
+    username: admin
+    password: dpvmtlqdl12!
+
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+#    database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
-      ddl-auto: create-drop
-    properties:
-      hibernate:
-        format_sql: true
-        show_sql: true
+      ddl-auto: update
+#        format_sql: true
+#        show_sql: true
+      globally_quoted_identifiers: 'true'
+
 
 
 #HS512???? ?? secret key 512bit, ? 64byte??? ?????

@@ -18,7 +18,7 @@ public class ArticleResponseDto {
 
     private String username;
 
-    private String category;
+    private Enum category;
 
     private Boolean isMyArticles= true ;
 
@@ -30,7 +30,7 @@ public class ArticleResponseDto {
         this.title = articleEntity.getTitle();
         this.content = articleEntity.getContent();
         this.username = articleEntity.getUserName();
-        this.category = articleEntity.getUserName();
+        this.category = articleEntity.getCategory();
         this.isMyArticles = Boolean.TRUE;
         this.now = articleEntity.getCreateAt();
     }

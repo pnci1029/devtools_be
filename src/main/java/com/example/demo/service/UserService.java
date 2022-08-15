@@ -1,7 +1,7 @@
 package com.example.demo.service;
 
 
-import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 import com.example.demo.dto.UserDto;
@@ -61,4 +61,17 @@ public class UserService {
     public Optional<User> getMyUserWithAuthorities() {
         return SecurityUtil.getCurrentUsername().flatMap(userRepository::findOneWithAuthorityEntityByUsername);
     }
+
+    public Boolean checkUsername(UserDto userDto) {
+//  중복 닉네임 검증
+        List<User> target = userRepository.findAll();
+        System.out.println(userDto.getUsername());
+        for (User targets : target) {
+            if (userDto.getUsername().equals(targets.getUsername())) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 }
