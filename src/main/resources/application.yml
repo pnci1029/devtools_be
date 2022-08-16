@@ -8,9 +8,9 @@ spring:
 #    username: sa
 #    password:
   datasource:
-    url: jdbc:mysql://spartaf12.ckf45r62i7nd.ap-northeast-2.rds.amazonaws.com:3306/spartaf12
-    username: admin
-    password: dpvmtlqdl12!
+    url:
+    username:
+    password:
 
   jpa:
     database-platform: org.hibernate.dialect.MySQL5Dialect
