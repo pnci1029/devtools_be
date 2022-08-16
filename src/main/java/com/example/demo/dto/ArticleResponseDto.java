@@ -22,7 +22,7 @@ public class ArticleResponseDto {
 
     private Boolean isMyArticles= true ;
 
-    private String now;
+    private String createAt;
 
 
     public ArticleResponseDto(ArticleEntity articleEntity) {
@@ -32,6 +32,6 @@ public class ArticleResponseDto {
         this.username = articleEntity.getUserName();
         this.category = articleEntity.getCategory();
         this.isMyArticles = Boolean.TRUE;
-        this.now = articleEntity.getCreateAt();
+        this.createAt = articleEntity.getCreateAt();
     }
 }

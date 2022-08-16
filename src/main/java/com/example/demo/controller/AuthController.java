@@ -69,8 +69,10 @@ public class AuthController {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add(JwtFilter.AUTHORIZATION_HEADER, jwt);
 
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+
 
         log.info(SecurityContextHolder.getContext().getAuthentication().getName());
-        return new ResponseEntity<>( new TokenDto(jwt), httpHeaders, HttpStatus.OK);
+        return new ResponseEntity<>( new TokenDto(jwt,username), httpHeaders, HttpStatus.OK);
     }
 }

@@ -12,6 +12,8 @@ public class TokenDto {
 
     private String mytoken;
 
+    private String username;
+
 
 
 }

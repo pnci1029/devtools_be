@@ -77,7 +77,7 @@ public class ArticleService {
 //    }
 
     @Transactional
-    public ArticleResponseDtoList getArticles() {
+    public List<ArticleResponseDto> getArticles() {
 //        String LoginUsername = SecurityContextHolder.getContext().getAuthentication().getName();
 
 
@@ -87,13 +87,13 @@ public class ArticleService {
             articleResponseDtos.add(new ArticleResponseDto(articles));
         }
         for (ArticleResponseDto datas : articleResponseDtos) {
-            if (!datas.getUsername().equals(bringUserName())) {
-                datas.setIsMyArticles(Boolean.FALSE);
+            if (datas.getUsername().equals(bringUserName())) {
+                datas.setIsMyArticles(Boolean.TRUE);
             }
         }
+//        ArticleResponseDtoList articleResponseDtoList = new ArticleResponseDtoList(bringUserName(), articleResponseDtos);
 
-        ArticleResponseDtoList articleResponseDtoList = new ArticleResponseDtoList(bringUserName(), articleResponseDtos);
-        return articleResponseDtoList;
+        return articleResponseDtos;
     }
 
     @Transactional
@@ -152,10 +152,19 @@ public class ArticleService {
 //        내림차순 정렬
         List<CommentEntity> commentEntity = commentRepository.findAllByArticleIdDesc(id);
 
+        List<CommentEntity> commentBox = new ArrayList<>();
+        for (CommentEntity commentData : commentEntity) {
+            if (commentData.getArticleId().equals(id)) {
+                commentBox.add(commentData);
+            }
+        }
+        if (!target.getUserName().equals(bringUserName())) {
+            target.setIsMyArticles(Boolean.FALSE);
+        }
 
 
 
-        ArticleDetailResponseDto articleDetailResponseDto = new ArticleDetailResponseDto(target, commentEntity);
+        ArticleDetailResponseDto articleDetailResponseDto = new ArticleDetailResponseDto(target, commentBox);
         return articleDetailResponseDto;
     }
 

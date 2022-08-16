@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.dto.ArticleDetailResponseDto;
 import com.example.demo.dto.ArticleDto;
+import com.example.demo.dto.ArticleResponseDto;
 import com.example.demo.entity.ArticleEntity;
 import com.example.demo.dto.ArticleResponseDtoList;
 import com.example.demo.repository.ArticleRepository;
@@ -9,6 +10,8 @@ import com.example.demo.service.ArticleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @CrossOrigin("http://localhost:3000")
 @RestController
@@ -36,7 +39,7 @@ public class ArticleController {
 //    }
 
     @GetMapping("/articles")
-    public ArticleResponseDtoList getArtciels() {
+    public List<ArticleResponseDto> getArtciels() {
         return articleService.getArticles();
     }
 
