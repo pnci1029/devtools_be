@@ -32,6 +32,9 @@ public class CommentService {
         ArticleEntity target = articleRepository.findById(articleId).orElseThrow(
                 () -> new NullPointerException("댓글을 달기 위한 게시물이 존재하지 않습니다.")
         );
+        if (dto.getComment().length() < 1 || dto.getComment().length() > 40) {
+            throw new IllegalArgumentException("댓글은 1~40글자로 입력해주세요");
+        }
         CommentEntity result = new CommentEntity(dto, getLoginUserName(),target, articleId);
 
         commentRepository.save(result);

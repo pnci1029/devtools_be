@@ -10,6 +10,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
 @Entity
@@ -34,7 +35,8 @@ public class CommentEntity {
     private Long articleId;
 
     @JsonIgnore
-    private LocalDateTime now1 = LocalDateTime.now();
+    @Transient
+    private LocalDateTime now1 = LocalDateTime.now(ZoneId.of("Asia/Seoul"));;
 
     @Column(name = "CREATED_TIME", nullable = false)
     private String createAt = now1.format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 HH시 mm분 ss초"));
