@@ -20,6 +20,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -48,18 +49,18 @@ public class AuthController {
     //해당 객체를 통해 authenticate 메소드 로직을 수행합니다. 이때 위에서 만들었던 loadUserByUsername 메소드가 수행되며 유저 정보를 조회해서 인증 정보를 생성하게 됩니다.
     @PostMapping("/login")
     public ResponseEntity<TokenDto> authorize(@RequestBody LoginDto loginDto) {
+        User LoginUserName = userRepository.findByUsername(loginDto.getUsername()).orElse(null);
+
+        if (LoginUserName == null) {
+            throw new AuthenticationException(ErrorType.UsernameNotFoundException);
+        }
+
+        User userPassword = userRepository.findPasswordByUsername(loginDto.getUsername()).orElse(null);
+
+        System.out.println(loginDto.getPassword());
+        System.out.println(userPassword);
         try {
 //      로그인시 유저 아이디 존재유무 확인
-            User LoginUserName = userRepository.findByUsername(loginDto.getUsername()).orElse(null);
-
-            if (LoginUserName == null) {
-                throw new IllegalArgumentException("사용자가 없습니다. 회원가입해주세요");
-            }
-
-            User userPassword = userRepository.findPasswordByUsername(loginDto.getUsername()).orElse(null);
-
-            System.out.println(loginDto.getPassword());
-            System.out.println(userPassword);
 //        if (!loginDto.getPassword().equals(userPassword)) {
 //            throw new IllegalArgumentException("로그인 정보를 다시 확인해 주세요.");
 //        }

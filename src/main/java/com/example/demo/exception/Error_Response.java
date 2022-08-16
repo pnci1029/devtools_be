@@ -8,6 +8,5 @@ import org.springframework.http.HttpStatus;
 @AllArgsConstructor
 public class Error_Response {
 
-    private int code = HttpStatus.BAD_REQUEST.value();
     private Object error;
 }
