@@ -10,10 +10,10 @@ public class ArticleResponseDtoList {
 
     private String LoginUserName;
 
-    private List<ArticleResponseDto> articleResponseDtos;
+    private List<ArticleResponseDto> responseArticles;
 
     public ArticleResponseDtoList(String LoginUserName, List<ArticleResponseDto> articleResponseDtos) {
         this.LoginUserName = LoginUserName;
-        this.articleResponseDtos = articleResponseDtos;
+        this.responseArticles = articleResponseDtos;
     }
 }

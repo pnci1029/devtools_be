@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -44,9 +46,9 @@ public class CommentEntity {
 //    @Column(nullable = false)
 //    private Long articleId;
 
-    @ManyToOne
     @JsonBackReference
-    @JoinColumn(name = "ARTICLE_COMMENT_ID")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @OnDelete(action= OnDeleteAction.CASCADE)
     private ArticleEntity articleEntity;
 
     public CommentEntity(CommentDto dto, String userName, ArticleEntity articleEntity, Long articleId) {

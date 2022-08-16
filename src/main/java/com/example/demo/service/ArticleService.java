@@ -152,6 +152,9 @@ public class ArticleService {
 //        내림차순 정렬
         List<CommentEntity> commentEntity = commentRepository.findAllByArticleIdDesc(id);
 
+
+
+
         ArticleDetailResponseDto articleDetailResponseDto = new ArticleDetailResponseDto(target, commentEntity);
         return articleDetailResponseDto;
     }

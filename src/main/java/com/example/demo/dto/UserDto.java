@@ -18,6 +18,5 @@ public class UserDto {
     private String username;
 
     @NotNull
-    @Size(min = 3, max = 100)
     private String password;
 }

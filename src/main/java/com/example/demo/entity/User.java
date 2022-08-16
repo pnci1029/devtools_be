@@ -23,7 +23,7 @@ public class User {
     private String username;
 
     @JsonIgnore
-    @Column(name = "password", length = 16)
+    @Column(name = "password")
     private String password;
 
     @JsonIgnore

@@ -23,7 +23,7 @@ public class UserService {
 //    영문 + 숫자 정규식
     private static final String idPattern = "^[0-9a-zA-Z]*$";
 //    영문 + 숫자 + 특수문자 정규식
-    private static final String pwPattern = "^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[$@$!%*#?&])[A-Za-z[0-9]$@$!%*#?&]$";
+    private static final String pwPattern = "^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[^a-zA-Z0-9ㄱ-힣])*$";
 
     @Autowired
     public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
@@ -50,9 +50,9 @@ public class UserService {
         if (userDto.getPassword().length() < 8 || userDto.getPassword().length() > 16) {
             throw new IllegalArgumentException("비밀번호는 8~16글자로 입력해주세요");
         }
-        if (!Pattern.matches(pwPattern, userDto.getPassword())) {
-            throw new IllegalArgumentException("비밀번호는 영문 숫자 특수문자 조합으로 작성해주세요");
-        }
+//        if (!Pattern.matches(pwPattern, userDto.getPassword())) {
+//            throw new IllegalArgumentException("비밀번호는 영문 숫자 특수문자 조합으로 작성해주세요");
+//        }
 
 
         //해당 메소드롤 생성된 유저는 ROLE_USER권한을 소유해서
