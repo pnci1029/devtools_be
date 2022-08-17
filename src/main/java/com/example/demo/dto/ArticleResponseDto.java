@@ -2,12 +2,14 @@ package com.example.demo.dto;
 
 import com.example.demo.entity.ArticleEntity;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Column;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class ArticleResponseDto {
 
     private Long id;

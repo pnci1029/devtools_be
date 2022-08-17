@@ -4,13 +4,16 @@ import com.example.demo.dto.ArticleDetailResponseDto;
 import com.example.demo.dto.ArticleDto;
 import com.example.demo.dto.ArticleResponseDto;
 import com.example.demo.entity.ArticleEntity;
-import com.example.demo.dto.ArticleResponseDtoList;
 import com.example.demo.entity.CommentEntity;
 import com.example.demo.repository.ArticleRepository;
 import com.example.demo.repository.CommentRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.boot.model.naming.IllegalIdentifierException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -37,7 +40,7 @@ public class ArticleService {
 
     public String rightNow() {
         LocalDateTime now1 = LocalDateTime.now();
-        String time = now1.format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 HH시 mm분 ss초"));
+        String time = now1.format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 HH시 mm분"));
         return time;
     }
 
@@ -46,7 +49,7 @@ public class ArticleService {
     }
 
 
-    // 페이지네이션
+//     페이지네이션
 //    @Transactional
 //    public List<ArticleResponseDto> getArticles(int size, int page) {
 //        String LoginUsername = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -147,7 +150,8 @@ public class ArticleService {
 //    게시판 상세페이지
     @Transactional
     public ArticleDetailResponseDto getDetailArticles(Long id) {
-        ArticleEntity target= articleRepository.findArticlesById(id);
+//        ArticleEntity target= articleRepository.findArticlesById(id);
+        ArticleEntity target = articleRepository.findById(id).orElse(null);
 
 //        내림차순 정렬
         List<CommentEntity> commentEntity = commentRepository.findAllByArticleIdDesc(id);
@@ -158,13 +162,20 @@ public class ArticleService {
                 commentBox.add(commentData);
             }
         }
-        if (!target.getUserName().equals(bringUserName())) {
-            target.setIsMyArticles(Boolean.FALSE);
+//        if (!target.getUserName().equals(bringUserName())) {
+//            target.setIsMyArticles(Boolean.FALSE);
+//        }
+
+        ArticleResponseDto articleResponseDtos = new ArticleResponseDto(target);
+
+        System.out.println(articleResponseDtos.getUsername());
+        if (!bringUserName().equals(articleResponseDtos.getUsername())) {
+            System.out.println(bringUserName());
+            articleResponseDtos.setIsMyArticles(Boolean.FALSE);
         }
 
 
-
-        ArticleDetailResponseDto articleDetailResponseDto = new ArticleDetailResponseDto(target, commentBox);
+        ArticleDetailResponseDto articleDetailResponseDto = new ArticleDetailResponseDto(articleResponseDtos, commentBox);
         return articleDetailResponseDto;
     }
 

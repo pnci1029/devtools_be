@@ -9,6 +9,7 @@ import com.example.demo.repository.ArticleRepository;
 import com.example.demo.service.ArticleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,14 +29,14 @@ public class ArticleController {
     }
 
     //    페이지네이션 완료
-//    @GetMapping("/api/articles")
+//    @GetMapping("/articles")
 //    public List<ArticleResponseDto> getArtciels(
 //            @RequestParam("size") int size,
 //            @RequestParam("page") int page
 //    ) {
 ////        4. 클라이언트 입장에서는 페이지가 1페이지부터 시작해서 1빼줌
 //        page = page - 1;
-//        return articleService.getArticles(size, page);
+//        return  articleService.getArticles(size, page);
 //    }
 
     @GetMapping("/articles")
@@ -44,7 +45,7 @@ public class ArticleController {
     }
 
     @PostMapping("/articles")
-    public void RpostArticles(@RequestBody ArticleDto articleDto) {
+    public void postArticles(@RequestBody ArticleDto articleDto) {
         articleService.postArticles(articleDto);
     }
 

@@ -21,4 +21,6 @@ public interface ArticleRepository extends JpaRepository<ArticleEntity, Long> {
     List<ArticleEntity> findAllDesc();
 
     ArticleEntity findArticlesById(Long id);
+
+    List<ArticleEntity> findAllArticlesById(Long id);
 }

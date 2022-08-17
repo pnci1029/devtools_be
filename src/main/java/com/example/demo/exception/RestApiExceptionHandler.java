@@ -1,5 +1,8 @@
 package com.example.demo.exception;
 
+import com.example.demo.exception.EveryExceptions.AuthenticationException;
+import com.example.demo.exception.EveryExceptions.IllegalArgumentException;
+import com.example.demo.exception.EveryExceptions.NullPointerException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -10,25 +13,22 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class RestApiExceptionHandler {
 
     @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<Object> illegalExeption(IllegalArgumentException illegalArgumentException) {
-        RestApiException restApi = new RestApiException();
-        restApi.setErrorMessage(illegalArgumentException.getMessage());
-        restApi.setHttpStatus(HttpStatus.BAD_REQUEST);
-        return new ResponseEntity(restApi.getErrorMessage(), restApi.getHttpStatus());
+    public ResponseEntity<ErrorResponse> IllegalArgumentException(IllegalArgumentException illegalArgumentException) {
+        ErrorResponse errorResponse = new ErrorResponse(illegalArgumentException.getErrorType().getDescription());
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(NullPointerException.class)
-    public ResponseEntity<Object> nullPointException(NullPointerException nullPointerException) {
-        RestApiException restApiException = new RestApiException();
-        restApiException.setErrorMessage(nullPointerException.getMessage());
-        restApiException.setHttpStatus(HttpStatus.BAD_REQUEST);
-        return new ResponseEntity<>(restApiException.getErrorMessage(), restApiException.getHttpStatus());
+    public ResponseEntity<ErrorResponse> nullPointException(NullPointerException nullPointerException) {
+        ErrorResponse errorResponse = new ErrorResponse(nullPointerException.getErrorType().getDescription());
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+
     }
 
     @ExceptionHandler(AuthenticationException.class)
     @ResponseBody
-    public ResponseEntity<Error_Response> handleAuthenticationException(AuthenticationException ex){
-        Error_Response errorResponse = new Error_Response(ex.getErrorType().getDescription());
+    public ResponseEntity<ErrorResponse> handleAuthenticationException(AuthenticationException ex){
+        ErrorResponse errorResponse = new ErrorResponse(ex.getErrorType().getDescription());
         return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 

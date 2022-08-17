@@ -3,29 +3,22 @@ package com.example.demo.controller;
 import com.example.demo.dto.LoginDto;
 import com.example.demo.dto.TokenDto;
 import com.example.demo.entity.User;
-import com.example.demo.exception.AuthenticationException;
 import com.example.demo.exception.ErrorType;
+import com.example.demo.exception.EveryExceptions.AuthenticationException;
 import com.example.demo.jwt.JwtFilter;
 import com.example.demo.jwt.TokenProvider;
 import com.example.demo.repository.UserRepository;
-import com.sun.net.httpserver.Headers;
 import lombok.extern.slf4j.Slf4j;
-import org.omg.CORBA.UserException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-import java.util.List;
-import java.util.Map;
 
 @CrossOrigin("http://localhost:3000")
 @Slf4j

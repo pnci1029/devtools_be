@@ -64,7 +64,7 @@ public class ArticleEntity  {
     private LocalDateTime now1 = LocalDateTime.now(ZoneId.of("Asia/Seoul"));;
 
     @Column(name = "createAt", nullable = false)
-    private String createAt = now1.format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 HH시 mm분 ss초"));
+    private String createAt = now1.format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 HH시 mm분"));
 
 
     public ArticleEntity(ArticleDto articleDto, String userName) {

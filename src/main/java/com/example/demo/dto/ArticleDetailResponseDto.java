@@ -25,19 +25,19 @@ public class ArticleDetailResponseDto {
 
     private Boolean isMyArticles;
 
-    private String now;
+    private String createAt;
 
     private List<CommentEntity> comments;
 
 
-    public ArticleDetailResponseDto(ArticleEntity articleEntity, List<CommentEntity> comments) {
-        this.id = articleEntity.getId();
-        this.title = articleEntity.getTitle();
-        this.content = articleEntity.getContent();
-        this.username = articleEntity.getUserName();
-        this.category = articleEntity.getCategory();
-        this.isMyArticles = articleEntity.getIsMyArticles();
-        this.now = articleEntity.getCreateAt();
+    public ArticleDetailResponseDto(ArticleResponseDto articleResponseDto, List<CommentEntity> comments) {
+        this.id = articleResponseDto.getId();
+        this.title = articleResponseDto.getTitle();
+        this.content = articleResponseDto.getContent();
+        this.username = articleResponseDto.getUsername();
+        this.category = articleResponseDto.getCategory();
+        this.isMyArticles = articleResponseDto.getIsMyArticles();
+        this.createAt = articleResponseDto.getCreateAt();
         this.comments = comments;
     }
 }
