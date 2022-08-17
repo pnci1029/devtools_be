@@ -7,11 +7,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
+import java.util.Optional;
 
 
 public interface ArticleRepository extends JpaRepository<ArticleEntity, Long> {
 //    리스트값들을 페이징해서 정렬
-//    @Query("select p from ArticleEntity p ORDER BY p.id DESC")
+//    @Query("select p from ArticleEntity p ORDER BY p.articleId DESC")
 ////      페이지네이션
 //    Page<ArticleEntity> findAllDesc(Pageable pageable);
 
@@ -20,7 +21,5 @@ public interface ArticleRepository extends JpaRepository<ArticleEntity, Long> {
     @Query("select p from ArticleEntity p ORDER BY p.id DESC")
     List<ArticleEntity> findAllDesc();
 
-    ArticleEntity findArticlesById(Long id);
 
-    List<ArticleEntity> findAllArticlesById(Long id);
 }

@@ -1,6 +1,5 @@
 package com.example.demo.dto;
 
-import com.example.demo.dto.ArticleResponseDto;
 import lombok.Getter;
 
 import java.util.List;

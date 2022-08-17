@@ -4,12 +4,9 @@ import com.example.demo.dto.ArticleDetailResponseDto;
 import com.example.demo.dto.ArticleDto;
 import com.example.demo.dto.ArticleResponseDto;
 import com.example.demo.entity.ArticleEntity;
-import com.example.demo.dto.ArticleResponseDtoList;
-import com.example.demo.repository.ArticleRepository;
 import com.example.demo.service.ArticleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,7 +18,6 @@ import java.util.List;
 public class ArticleController {
 
     private ArticleService articleService;
-
 
     @Autowired
     public ArticleController(ArticleService articleService) {
@@ -40,7 +36,7 @@ public class ArticleController {
 //    }
 
     @GetMapping("/articles")
-    public List<ArticleResponseDto> getArtciels() {
+    public List<ArticleResponseDto> getArticles() {
         return articleService.getArticles();
     }
 

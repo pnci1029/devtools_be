@@ -13,7 +13,7 @@ import java.util.List;
 @Setter
 public class ArticleDetailResponseDto {
 
-    private Long id;
+    private Long articleId;
 
     private String title;
 
@@ -31,7 +31,7 @@ public class ArticleDetailResponseDto {
 
 
     public ArticleDetailResponseDto(ArticleResponseDto articleResponseDto, List<CommentEntity> comments) {
-        this.id = articleResponseDto.getId();
+        this.articleId = articleResponseDto.getArticleId();
         this.title = articleResponseDto.getTitle();
         this.content = articleResponseDto.getContent();
         this.username = articleResponseDto.getUsername();

@@ -20,14 +20,18 @@ public enum ErrorType {
 
     idTypeMix(400,"아이디는 숫자와 영어 조합으로 작성해주세요" ,HttpStatus.BAD_REQUEST ),
 
-    idLengthIssue(400, "아이디는 8~12글자로 작성해주세요", HttpStatus.BAD_REQUEST )
+    idLengthIssue(400, "아이디는 4~12글자로 작성해주세요", HttpStatus.BAD_REQUEST ),
 
 
+    ArticleLengthException(400, "제목은 1~40글자로 작성해주세요", HttpStatus.BAD_REQUEST),
 
+    ContentLengthException(400, "내용은 1~400글자로 작성해주세요", HttpStatus.BAD_REQUEST),
 
-
-
-    ;
+    NotExistPatchArticles(400, "수정할 아이디가 없습니다.", HttpStatus.BAD_REQUEST),
+    PatchOtherArticles(400, "다른 사용자 게시글을 수정할 수 없습니다", HttpStatus.BAD_REQUEST),
+    PatchBlank(400, "수정해주세요", HttpStatus.BAD_REQUEST),
+    NotExistDeleteArticles(400, "삭제 할 아이디가 없습니다", HttpStatus.BAD_REQUEST),
+    DeleteOtherArticles(400, "다른 사용자 게시글을 삭제할 수 없습니다", HttpStatus.BAD_REQUEST);
 
     @Getter
     private int code;

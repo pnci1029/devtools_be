@@ -31,7 +31,7 @@ public class CommentEntity {
     private String comment;
 
     @Column(nullable = false)
-    private String userName;
+    private String username;
 
     @Column(nullable = false)
     private Long articleId;
@@ -47,14 +47,15 @@ public class CommentEntity {
 //    private Long articleId;
 
     @JsonBackReference
+    @Transient
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action= OnDeleteAction.CASCADE)
     private ArticleEntity articleEntity;
 
-    public CommentEntity(CommentDto dto, String userName, ArticleEntity articleEntity, Long articleId) {
+    public CommentEntity(CommentDto dto, String username, ArticleEntity articleEntity, Long articleId) {
         this.comment = dto.getComment();
         this.articleEntity = articleEntity;
-        this.userName = userName;
+        this.username = username;
         this.articleId = articleId;
     }
 

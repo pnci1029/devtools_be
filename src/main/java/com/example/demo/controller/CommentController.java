@@ -23,9 +23,4 @@ public class CommentController {
         return commentService.postComment(articleId, dto);
     }
 
-//    @GetMapping("/{id}")
-//    public String getComment(@PathVariable Long id) {
-//
-//        return commentService.getComment(id);
-//    }
 }

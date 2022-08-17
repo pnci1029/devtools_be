@@ -12,7 +12,7 @@ import javax.persistence.Column;
 @NoArgsConstructor
 public class ArticleResponseDto {
 
-    private Long id;
+    private Long articleId;
 
     private String title;
 
@@ -26,9 +26,8 @@ public class ArticleResponseDto {
 
     private String createAt;
 
-
     public ArticleResponseDto(ArticleEntity articleEntity) {
-        this.id = articleEntity.getId();
+        this.articleId = articleEntity.getId();
         this.title = articleEntity.getTitle();
         this.content = articleEntity.getContent();
         this.username = articleEntity.getUserName();
