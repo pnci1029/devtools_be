@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @CrossOrigin("http://localhost:3000")
+//@CrossOrigin("devtools-lllj9dvqk-green9930.vercel.app")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api")

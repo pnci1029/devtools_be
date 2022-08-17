@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @CrossOrigin("http://localhost:3000")
+//@CrossOrigin("devtools-lllj9dvqk-green9930.vercel.app")
+
 @RestController
 @RequestMapping("/api")
 public class UserController {

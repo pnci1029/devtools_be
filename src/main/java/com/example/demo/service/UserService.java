@@ -21,9 +21,13 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     //    영문 + 숫자 정규식
-    private static final String idPattern = "^[0-9a-zA-Z]*$";
+    private static final String idPattern = "^[A-za-z0-9]{4,12}$";
     //    영문 + 숫자 + 특수문자 정규식
-    private static final String pwPattern = "^.*(?=^.{8,16}$)(?=.*\\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$";
+//    private static final String pwPattern = "^.*(?=^.{8,16}$)(?=.*\\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$";
+    private static final String pwPattern = "^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\\\(\\\\)\\-_=+]).{8,16}$";
+//    private static final String pwPattern = const idRegExp = /^[A-za-z0-9]{4,12}$/g;
+//const pwRegExp =
+//            /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{8,16}$/;
 
     @Autowired
     public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
