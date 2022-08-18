@@ -5,6 +5,7 @@ import com.example.demo.jwt.JwtAuthenticationEntryPoint;
 import com.example.demo.jwt.JwtSecurityConfig;
 import com.example.demo.jwt.TokenProvider;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -19,6 +20,7 @@ import org.springframework.web.cors.CorsUtils;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 @EnableWebSecurity
 //메소드 단위로 @PreAuthorize 검증 어노테이션을 사용하기 위해 추가 //사전승인ㅇ
@@ -45,10 +47,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //    CorsConfigurationSource corsConfigurationSource() {
 //        CorsConfiguration configuration = new CorsConfiguration();
 //
-//        configuration.setAllowedOriginPatterns(Arrays.asList("*"));
+//        configuration.setAllowedOriginPatterns(Collections.singletonList("*"));
 //        configuration.setAllowedMethods(Arrays.asList("HEAD","POST","GET","DELETE","PUT"));
-//        configuration.setAllowedHeaders(Arrays.asList("*"));
-//        configuration.setAllowedOrigins(Arrays.asList("https://devtools-695d2dzdx-green9930.vercel.app"));
+//        configuration.setAllowedHeaders(Collections.singletonList("*"));
+//        configuration.setAllowedOrigins(Collections.singletonList("*"));
 //        configuration.setAllowCredentials(true);
 //
 //        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
@@ -79,7 +81,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 //토큰방식을 사용하므로 csrf disable
                 .csrf().disable()
-
                 .cors()
                 .and()
 
@@ -104,11 +105,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //authenticate는 로그인 , signup은 회원가입임
                 .and()
                 .authorizeRequests()
-
 //                .antMatchers("/api/hello").permitAll()
                 .antMatchers("/api/login").permitAll()
                 .antMatchers("/api/register").permitAll()
                 .antMatchers("/api/articles/**").permitAll()
+
+                .antMatchers(HttpMethod.OPTIONS, "/api/**").permitAll()
 
                 .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
 
