@@ -2,6 +2,8 @@ package com.example.demo.jwt;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.StringUtils;
@@ -13,9 +15,12 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpServletResponseWrapper;
 import java.io.IOException;
 
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3000, https://devtools-695d2dzdx-green9930.vercel.app")
+
 //JWT를 위한 Custom Filter를 만들기위해 GenericFilterBean을 상속한 jwtFilter.java 생성
 public class JwtFilter extends GenericFilterBean {
 
@@ -40,6 +45,15 @@ public class JwtFilter extends GenericFilterBean {
         String jwt = resolveToken(httpServletRequest);
         String requestURI = httpServletRequest.getRequestURI();
 
+//        HttpServletResponse response = (HttpServletResponse) servletResponse;
+//        HttpServletRequest request = (HttpServletRequest) servletRequest;
+//
+//        response.setHeader("Access-Control-Allow-Origin", "*");
+//        response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
+//        response.setHeader("Access-Control-Max-Age", "3600");
+//        response.setHeader("Access-Control-Allow-Credentials", "true");
+//        response.setHeader("Access-Control-Allow-Headers", "x-requested-with,Authorization,token, content-type");
+
         if (StringUtils.hasText(jwt) && tokenProvider.validateToken(jwt)) {
             Authentication authentication = tokenProvider.getAuthentication(jwt);
             SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -48,7 +62,13 @@ public class JwtFilter extends GenericFilterBean {
             logger.debug("유효한 JWT 토큰이 없습니다, uri: {}", requestURI);
         }
 
-        filterChain.doFilter(servletRequest, servletResponse);
+//        if (request.getMethod().equals(HttpMethod.OPTIONS.name())){
+//
+//            response.setStatus(HttpStatus.NO_CONTENT.value());
+//        }else {
+
+            filterChain.doFilter(servletRequest, servletResponse);
+//        }
     }
 
     private String resolveToken(HttpServletRequest request) {

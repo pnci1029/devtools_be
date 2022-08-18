@@ -15,6 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.CorsUtils;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.Arrays;
@@ -40,19 +41,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         this.jwtAccessDeniedHandler = jwtAccessDeniedHandler;
     }
 
-    @Bean
-    CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
+//    @Bean
+//    CorsConfigurationSource corsConfigurationSource() {
+//        CorsConfiguration configuration = new CorsConfiguration();
+//
+//        configuration.setAllowedOriginPatterns(Arrays.asList("*"));
+//        configuration.setAllowedMethods(Arrays.asList("HEAD","POST","GET","DELETE","PUT"));
+//        configuration.setAllowedHeaders(Arrays.asList("*"));
+//        configuration.setAllowedOrigins(Arrays.asList("https://devtools-695d2dzdx-green9930.vercel.app"));
+//        configuration.setAllowCredentials(true);
+//
+//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        source.registerCorsConfiguration("/**", configuration);
+//        return source;
+//    }
 
-        configuration.setAllowedOriginPatterns(Arrays.asList("*"));
-        configuration.setAllowedMethods(Arrays.asList("HEAD","POST","GET","DELETE","PUT"));
-        configuration.setAllowedHeaders(Arrays.asList("*"));
-        configuration.setAllowCredentials(true);
-
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
-    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -70,11 +73,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 );
     }
 
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 //토큰방식을 사용하므로 csrf disable
                 .csrf().disable()
+
+                .cors()
+                .and()
+
 
                 //예외처리를 위해 만들었던 코드를 지정함
                 .exceptionHandling()
@@ -96,11 +104,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //authenticate는 로그인 , signup은 회원가입임
                 .and()
                 .authorizeRequests()
+
 //                .antMatchers("/api/hello").permitAll()
                 .antMatchers("/api/login").permitAll()
                 .antMatchers("/api/register").permitAll()
                 .antMatchers("/api/articles/**").permitAll()
 
+                .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
 
 
                 .antMatchers("/**").permitAll()
@@ -113,5 +123,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .apply(new JwtSecurityConfig(tokenProvider));
     }
+
 
 }

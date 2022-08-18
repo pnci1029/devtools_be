@@ -18,8 +18,10 @@ spring:
 #        show_sql: true
       globally_quoted_identifiers: 'true'
 
-
-#server:
+security:
+  require-ssl=true:
+  mvc:
+    dispatch-options-request: true
 
 #HS512???? ?? secret key 512bit, ? 64byte??? ?????
 jwt:

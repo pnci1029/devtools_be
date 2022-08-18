@@ -11,8 +11,9 @@ import java.util.Optional;
 
 
 public interface ArticleRepository extends JpaRepository<ArticleEntity, Long> {
-//    리스트값들을 페이징해서 정렬
-//    @Query("select p from ArticleEntity p ORDER BY p.articleId DESC")
+
+    //    리스트값들을 페이징해서 정렬
+//    @Query("select p from ArticleEntity p ORDER BY p.id DESC")
 ////      페이지네이션
 //    Page<ArticleEntity> findAllDesc(Pageable pageable);
 

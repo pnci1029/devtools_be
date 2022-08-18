@@ -52,7 +52,7 @@ public class ArticleEntity  {
     @Enumerated(EnumType.STRING)
     private Category category;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "comment")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "commentId")
     @JsonManagedReference
     private List<CommentEntity> CommentEntity;
 

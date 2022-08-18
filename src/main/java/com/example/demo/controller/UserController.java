@@ -9,9 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-@CrossOrigin("http://localhost:3000")
-//@CrossOrigin("devtools-lllj9dvqk-green9930.vercel.app")
-
+@CrossOrigin(origins = "http://localhost:3000, https://devtools-695d2dzdx-green9930.vercel.app")
 @RestController
 @RequestMapping("/api")
 public class UserController {
@@ -21,6 +19,7 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService = userService;
     }
+
 //  회원가입 api
     @PostMapping("/register")
     public ResponseEntity<User> signup(@Valid @RequestBody UserDto userDto) {
